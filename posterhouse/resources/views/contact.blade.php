@@ -63,14 +63,14 @@
         </div>
         <div class="container">
             <div class="col-xs-6 col-md-2">
-                <img src="../../public/images/shaun.png"/>
+                <img src="{{ URL::asset('images/shaun.png') }}"/>
                 <p>Shaun van Beurden</p>
                 <p>WebsiteOntwikkelaar</p>
                 <p>06-53520699</p>
                 <p>smkbeurd@avans.nl</p>
             </div>
             <div class="col-xs-6 col-md-2">
-                <img src="../../public/images/dennis.png"/>
+                <img src="{{ URL::asset('images/dennis.png') }}"/>
                 <p>Dennis Tijbosch</p>
                 <p>WebsiteOntwikkelaar</p>
                 <p>06-37881657</p>
