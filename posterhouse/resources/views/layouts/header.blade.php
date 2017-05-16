@@ -17,9 +17,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ route('welcome') }}">Home</a></li>
-                <li><a href="{{ route('producten') }}">Producten</a></li>
-                <li><a href="{{ route('contact') }}">Contact</a></li>
+                @php
+                $menuItems = App\Menuitem::all();
+                @endphp
+                @foreach($menuItems as $menuItem)
+                    <li><a href="{{ route($menuItem->menuitem_link) }}">{{ $menuItem->menuitem_name }}</a></li>
+                @endforeach
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{ route('winkelmandje') }}"><span class="glyphicon glyphicon-shopping-cart"></span> Winkelwagen</a></li>
