@@ -15,10 +15,6 @@ Route::get('/', array('as' => 'welcome', function () {
     return view('welcome');
 }));
 
-Route::get('/producten', array('as' => 'producten', function () {
-    return view('producten');
-}));
-
 Route::get('/contact', array('as' => 'contact', function () {
     return view('contact');
 }));
@@ -30,6 +26,8 @@ Route::get('/winkelmandje', array('as' => 'winkelmandje', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/producten', 'ProductController@index')->name('producten');
 
 Route::get('/cms', array('as' => 'cms_home', function () {
     return view('cms.cms_home');

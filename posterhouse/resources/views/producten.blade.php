@@ -15,7 +15,18 @@
             <h4>Filter op categorie</h4>
             <ul class="nav navbar-nav">
                 <div class="col-lg">
-                    <li><a href='#'>Categorie</a></li>
+                    @foreach ($categories as $category)
+                        <form action='producten.php' method='get'>
+                            <li><a href='?category={{ $category->category_name }}'>{{ $category->category_name }}</a></li>
+                        </form>
+                        @foreach ($subcategories as $subcategory)
+                            @if ($subcategory->Category_id == $category->id)
+                                <form action='producten.php' method='get'>
+                                    <li style='margin-left:10%'><a href='?subcategory={{ $subcategory->subcategory_name }}'>{{ $subcategory->subcategory_name }}</a></li>
+                                </form>
+                            @endif
+                        @endforeach
+                    @endforeach
                 </div>
             </ul>
         </div>
@@ -24,6 +35,15 @@
     <!-- artikelen -->
     <div class="col-sm-6" style="margin-bottom:2%; text-align:center;">
         <h2>Artikelen</h2>
+        @foreach ($products as $product)
+            <form action='winkelmandje?action=add&id="{{ $product->id }}"' method='post'>
+                <div class='col-xs-6 col-md-3' align='center'>
+                    <img src='{{ URL::to('/') }}/images/posters/{{ $product->image }}' height='250' width='180'/>
+                    <p>€{{ $product->price }}</p>
+                    <a href='productdetails.php?id="{{ $product->id }}"'>{{ $product->product_name }}</a>
+                </div>
+            </form>
+        @endforeach
     </div>
 </div>
 
