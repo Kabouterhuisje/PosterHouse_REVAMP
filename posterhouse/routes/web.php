@@ -34,3 +34,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/cms', array('as' => 'cms_home', function () {
     return view('cms.cms_home');
 }));
+
+Route::post('send_message', array('as' => 'send_message', 'uses' => 'MessageController@sendMessage'));

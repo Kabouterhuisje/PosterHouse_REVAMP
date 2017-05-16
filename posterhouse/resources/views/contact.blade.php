@@ -11,7 +11,8 @@
 <div class="container">
     <!-- Form -->
     <div class="col-xs-6 col-md-7">
-        <form class="form-horizontal" role="form" method="post" action="contact.php">
+        {{ Form::open(['route' => 'send_message']) }}
+        {{ Form::hidden('_token', csrf_token()) }}
             <div class="form-group" style="margin-top:23%;text-align:center;font-family:Verdana, Geneva, sans-serif;font-size:35px;">
                 <p>Contact opnemen</p>
             </div>
@@ -44,7 +45,7 @@
                     <input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
                 </div>
             </div>
-        </form>
+        {{ Form::close() }}
     </div>
 
     <!-- Contactgegevens -->
