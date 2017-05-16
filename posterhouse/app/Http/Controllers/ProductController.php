@@ -25,6 +25,7 @@ class ProductController extends Controller
         }
         else if (isset($_GET['subcategory'])) {
             $products = Product::orderBy('product_name')
+                ->select('products.*')
                 ->join('product_has_subcategory', 'product_has_subcategory.Product_id', '=', 'products.id')
                 ->join('subcategories', 'subcategories.id', '=', 'product_has_subcategory.Subcategory_id')
                 ->where('subcategory_name',  $_GET["subcategory"])
@@ -32,6 +33,7 @@ class ProductController extends Controller
         }
         else if (isset($_GET['category'])) {
             $products = Product::orderBy('product_name')
+                ->select('products.*')
                 ->join('product_has_subcategory', 'product_has_subcategory.Product_id', '=', 'products.id')
                 ->join('subcategories', 'subcategories.id', '=', 'product_has_subcategory.Subcategory_id')
                 ->join('categories', 'categories.id', '=', 'subcategories.Category_id')

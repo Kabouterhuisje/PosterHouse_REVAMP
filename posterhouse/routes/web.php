@@ -29,6 +29,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/producten', 'ProductController@index')->name('producten');
 
+Route::get('/productdetails/{product}', 'ProductDetailsController@index')->name('productdetails');
+
 Route::get('/cms', array('as' => 'cms_home', function () {
     return view('cms.cms_home');
 }));

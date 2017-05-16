@@ -36,13 +36,11 @@
     <div class="col-sm-6" style="margin-bottom:2%; text-align:center;">
         <h2>Artikelen</h2>
         @foreach ($products as $product)
-            <form action='winkelmandje?action=add&id="{{ $product->id }}"' method='post'>
-                <div class='col-xs-6 col-md-3' align='center'>
-                    <img src='{{ URL::to('/') }}/images/posters/{{ $product->image }}' height='250' width='180'/>
-                    <p>€{{ $product->price }}</p>
-                    <a href='productdetails.php?id="{{ $product->id }}"'>{{ $product->product_name }}</a>
-                </div>
-            </form>
+            <div class='col-xs-6 col-md-3' align='center'>
+                <img src='{{ URL::to('/') }}/images/posters/{{ $product->image }}' height='250' width='180'/>
+                <p>€{{ $product->price }}</p>
+                <a href="{{ route('productdetails', $product) }}">{{ $product->product_name }}</a>
+            </div>
         @endforeach
     </div>
 </div>

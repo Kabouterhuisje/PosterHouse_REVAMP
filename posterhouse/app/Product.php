@@ -12,7 +12,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'product_name', 'price', 'image',
+        'product_name', 'price', 'description', 'image',
     ];
 
     /**
@@ -21,6 +21,6 @@ class Product extends Model
      * @var array
      */
     protected $hidden = [
-        'product_name', 'price', 'image',
+        'product_name', 'price', 'description',  'image',
     ];
 }
