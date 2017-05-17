@@ -41,7 +41,7 @@
                     <td id="table-data-style"> {{ $product->description }}</td>
                     <td id="table-data-style"><img src="{{URL::asset('/images/'.$product->image)}}" height="100px" width="100px"/></td>
                     <td> <button type="button" class="btn btn-primary" onclick="window.location='{{URL::route('editProduct', $product->id)}}'">Bewerken</button></td>
-
+                    <td><form action="verwijderProduct/{{$product->id}}"><input type="submit" class="btn btn-danger" value="Verwijderen"/></form></td>
                 </tr>
             @endforeach
         </table>

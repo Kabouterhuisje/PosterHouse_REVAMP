@@ -78,4 +78,11 @@ class ProductController extends Controller
 
         return Redirect::to('cms/producten');
     }
+
+    public function removeProduct($id)
+    {
+        Product::Where('id', '=', $id)->Delete();
+
+        return redirect('cms/producten');
+    }
 }

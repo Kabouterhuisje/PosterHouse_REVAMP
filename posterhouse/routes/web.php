@@ -54,3 +54,4 @@ Route::get('cms/wijzig_product/{productNummer}', array('as' => 'editProduct', fu
 
 Route::post('cms/wijzigProduct', array('as' => 'wijzigProduct', 'uses' => 'ProductController@editProduct'));
 Route::post('cms/nieuwProduct', array('as' => 'nieuwProduct', 'uses' => 'ProductController@newProduct'));
+Route::get('cms/verwijderProduct/{id}', ['uses' => 'ProductController@removeProduct']);
