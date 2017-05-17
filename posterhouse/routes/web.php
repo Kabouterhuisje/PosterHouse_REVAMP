@@ -51,3 +51,6 @@ Route::get('cms/wijzig_product/{productNummer}', array('as' => 'editProduct', fu
     );
     return view('cms.cms_edit_product', $data);
 }));
+
+Route::post('cms/wijzigProduct', array('as' => 'wijzigProduct', 'uses' => 'ProductController@editProduct'));
+Route::post('cms/nieuwProduct', array('as' => 'nieuwProduct', 'uses' => 'ProductController@newProduct'));

@@ -5,8 +5,6 @@
     <script src="{{ URL::asset('js/app.js') }}"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="body-cms">
 @if (Auth::check() && Auth::user()->role == "admin")
@@ -41,7 +39,7 @@
                     <td id="table-data-style"> {{ $product->product_name }}</td>
                     <td id="table-data-style"> {{ $product->price }}</td>
                     <td id="table-data-style"> {{ $product->description }}</td>
-                    <td id="table-data-style"><img src="{{URL::asset('/img/Sponsors/'.$product->image)}}" height="100px" width="100px"/></td>
+                    <td id="table-data-style"><img src="{{URL::asset('/images/'.$product->image)}}" height="100px" width="100px"/></td>
                     <td> <button type="button" class="btn btn-primary" onclick="window.location='{{URL::route('editProduct', $product->id)}}'">Bewerken</button></td>
 
                 </tr>

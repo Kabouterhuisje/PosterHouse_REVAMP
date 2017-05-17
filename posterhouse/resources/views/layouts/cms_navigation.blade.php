@@ -3,7 +3,7 @@
 @section('navigation')
     <div class="sidenav">
         <a href="{{ route('home') }}" id="logo"> <img src="{{ URL::asset('images/Logo.png') }}" width="50px"> </a>
-        <a href="{{URL::route('cms_home')}}"><b>Home</b></a>
+        <a href="{{URL::route('cms_home')}}" class="{{ (($currentPage)) == "Home" ? 'active' : ' ' }}"><b>Home</b></a>
         <br/>
 
         <br>
