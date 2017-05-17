@@ -36,3 +36,18 @@ Route::get('/cms', array('as' => 'cms_home', function () {
 }));
 
 Route::post('send_message', array('as' => 'send_message', 'uses' => 'MessageController@sendMessage'));
+
+Route::get('/cms/producten', array('as' => 'cms_products', function () {
+    return view('cms.cms_products');
+}));
+
+Route::get('cms/nieuw_product', array('as' => 'newProduct', function () {
+    return view('cms.cms_new_product');
+}));
+
+Route::get('cms/wijzig_product/{productNummer}', array('as' => 'editProduct', function ($productNummer) {
+    $data = array(
+        'id' => $productNummer
+    );
+    return view('cms.cms_edit_product', $data);
+}));
