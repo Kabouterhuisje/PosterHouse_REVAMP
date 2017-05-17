@@ -21,6 +21,7 @@
         <!-- subcategories -->
         @php
             $subcategories = App\Subcategory::all();
+            $categories = App\Category::all();
             $controller = new \App\Http\Controllers\SubcategoryController();
             $categories= App\Category::all();
         @endphp
@@ -36,7 +37,11 @@
                 <tr id="table-row-style">
                     <td id="table-data-style"> {{ $subcategory->id }}</td>
                     <td id="table-data-style"> {{ $subcategory->subcategory_name }}</td>
-                    <td id="table-data-style"> {{ $subcategory->Category_id }}</td>
+                    @foreach($categories as $category)
+                        @if($category->id == $subcategory->Category_id)
+                            <td id="table-data-style"> {{ $category->category_name }}</td>
+                        @endif
+                    @endforeach
                     <td> <button type="button" class="btn btn-primary" onclick="window.location='{{URL::route('editSubcategory', $subcategory->id)}}'">Bewerken</button></td>
                     <td><form action="verwijderSubcategory/{{$subcategory->id}}"><input type="submit" class="btn btn-danger" value="Verwijderen"/></form></td>
                 </tr>

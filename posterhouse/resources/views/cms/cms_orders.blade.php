@@ -17,6 +17,7 @@
         <!-- orders -->
         @php
             $orders = App\Order::all();
+            $users = App\User::all();
             $controller = new \App\Http\Controllers\OrderController();
         @endphp
 
@@ -33,7 +34,11 @@
                     <td id="table-data-style"> {{ $order->id }}</td>
                     <td id="table-data-style"> {{ $order->total_price }}</td>
                     <td id="table-data-style"> {{ $order->date_created }}</td>
-                    <td id="table-data-style"> {{ $order->User_id }}</td>
+                    @foreach($users as $user)
+                        @if($user->id == $order->id)
+                            <td id="table-data-style"> {{ $user->name }}</td>
+                        @endif
+                    @endforeach
                     <td><form action="verwijderOrder/{{$order->id}}"><input type="submit" class="btn btn-danger" value="Verwijderen"/></form></td>
                 </tr>
             @endforeach
