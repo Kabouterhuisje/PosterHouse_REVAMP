@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->double('total_price');
             $table->dateTime('date_created');
             $table->integer('User_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 

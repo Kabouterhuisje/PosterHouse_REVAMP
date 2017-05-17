@@ -94,3 +94,9 @@ Route::post('cms/wijzigSubcategory', array('as' => 'wijzigSubcategory', 'uses' =
 Route::post('cms/nieuwSubcategory', array('as' => 'nieuwSubcategory', 'uses' => 'SubcategoryController@newSubcategory'));
 Route::get('cms/verwijderSubcategory/{id}', ['uses' => 'SubcategoryController@removeSubcategory']);
 
+Route::get('/cms/orders', array('as' => 'cms_orders', function () {
+    return view('cms.cms_orders');
+}));
+
+Route::get('cms/verwijderOrder/{id}', ['uses' => 'OrderController@removeOrder']);
+
