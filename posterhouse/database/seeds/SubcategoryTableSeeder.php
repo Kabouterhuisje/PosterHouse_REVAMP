@@ -11,7 +11,7 @@ class SubcategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('subcategorys')->delete();
+        DB::table('subcategories')->delete();
 
         $subcategorys = array(
             array(
@@ -24,6 +24,6 @@ class SubcategoryTableSeeder extends Seeder
             )
         );
 
-        DB::table('subcategorys')->insert($subcategorys);
+        DB::table('subcategories')->insert($subcategorys);
     }
 }

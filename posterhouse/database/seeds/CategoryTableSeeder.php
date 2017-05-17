@@ -11,7 +11,7 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categorys')->delete();
+        DB::table('categories')->delete();
 
         $categorys = array(
             array(
@@ -22,6 +22,6 @@ class CategoryTableSeeder extends Seeder
             )
         );
 
-        DB::table('categorys')->insert($categorys);
+        DB::table('categories')->insert($categorys);
     }
 }
