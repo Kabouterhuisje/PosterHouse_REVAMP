@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Product_has_subcategory;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Subcategory;
 use App\Product;
 use Illuminate\Support\Facades\Redirect;
+use DB;
 
 class ProductController extends Controller
 {
@@ -57,8 +59,14 @@ class ProductController extends Controller
         $imageName = $request->image->getClientOriginalName();
         $request->image->move(public_path('images'), $imageName);
 
-        Product::Insert(['product_name' => $_POST['product_name'], 'image' => $imageName, 'description' => $_POST['description'],
-            'price' => $_POST['price'] ]);
+//        Product::Insert(['product_name' => $_POST['product_name'], 'image' => $imageName, 'description' => $_POST['description'],
+//            'price' => $_POST['price'] ]);
+
+        $last_id = DB::table('products')->insertGetId(
+          ['product_name' => $_POST['product_name'], 'image' => $imageName, 'description' => $_POST['description'], 'price' => $_POST['price']]
+        );
+
+        Product_has_subcategory::Insert(['Product_id' => $last_id, 'Subcategory_id' => $_POST['subcategory'] ]);
 
         return Redirect::to('cms/producten');
 

@@ -22,7 +22,15 @@
             <textarea rows="5" cols="60" name="description" required></textarea> <br>
             Prijs: <br>
             <input type="number" name="price" min="0" required>  <br>
-
+            Subcategorie: <br>
+            @php
+                $subcategories = App\Subcategory::all();
+            @endphp
+            <select name="subcategory" required>
+                @foreach($subcategories as $subcategory)
+                    <option value="{{ $subcategory->id }}" name="subcategory">{{ $subcategory->subcategory_name }}</option>
+                @endforeach
+            </select><br><br>
             <br>
             <input class="btn btn-primary" type="submit" value="Aanmaken"/>
         </form>

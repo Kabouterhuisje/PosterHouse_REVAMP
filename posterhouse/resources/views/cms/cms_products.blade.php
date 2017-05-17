@@ -21,6 +21,8 @@
         <!-- producten -->
         @php
             $products = App\Product::all();
+            $product_has_subcategory = App\Product_has_subcategory::all();
+            $subcategories = App\Subcategory::all();
             $controller = new \App\Http\Controllers\ProductController();
         @endphp
 
@@ -31,6 +33,7 @@
                 <th id="table-header-style">Prijs</th>
                 <th id="table-header-style">Beschrijving</th>
                 <th id="table-header-style">Afbeelding</th>
+                <th id="table-header-style">Subcategorie</th>
                 <th></th>
             </tr>
             @foreach ($products as $product)
@@ -40,6 +43,15 @@
                     <td id="table-data-style"> {{ $product->price }}</td>
                     <td id="table-data-style"> {{ $product->description }}</td>
                     <td id="table-data-style"><img src="{{URL::asset('/images/'.$product->image)}}" height="100px" width="100px"/></td>
+                    @foreach($product_has_subcategory as $subcategory_product)
+                        @if($subcategory_product->Product_id == $product->id)
+                            @foreach($subcategories as $subcategory)
+                                @if($subcategory->id == $subcategory_product->Subcategory_id)
+                                    <td id="table-data-style"> {{ $subcategory->subcategory_name }}</td>
+                                @endif
+                            @endforeach
+                        @endif
+                    @endforeach
                     <td> <button type="button" class="btn btn-primary" onclick="window.location='{{URL::route('editProduct', $product->id)}}'">Bewerken</button></td>
                     <td><form action="verwijderProduct/{{$product->id}}"><input type="submit" class="btn btn-danger" value="Verwijderen"/></form></td>
                 </tr>

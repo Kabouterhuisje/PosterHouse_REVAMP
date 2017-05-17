@@ -13,7 +13,7 @@ class CreateProductHasSubcategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_has_subcategory', function (Blueprint $table) {
+        Schema::create('product_has_subcategories', function (Blueprint $table) {
             $table->integer('Product_id')->unsigned();
             $table->integer('Subcategory_id')->unsigned();
         });
@@ -26,6 +26,6 @@ class CreateProductHasSubcategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_has_subcategory');
+        Schema::dropIfExists('product_has_subcategories');
     }
 }
