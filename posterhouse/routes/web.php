@@ -55,3 +55,22 @@ Route::get('cms/wijzig_product/{productNummer}', array('as' => 'editProduct', fu
 Route::post('cms/wijzigProduct', array('as' => 'wijzigProduct', 'uses' => 'ProductController@editProduct'));
 Route::post('cms/nieuwProduct', array('as' => 'nieuwProduct', 'uses' => 'ProductController@newProduct'));
 Route::get('cms/verwijderProduct/{id}', ['uses' => 'ProductController@removeProduct']);
+
+Route::get('/cms/categories', array('as' => 'cms_categories', function () {
+    return view('cms.cms_categories');
+}));
+
+Route::get('cms/nieuw_category', array('as' => 'newCategory', function () {
+    return view('cms.cms_new_category');
+}));
+
+Route::get('cms/wijzig_category/{categoryNummer}', array('as' => 'editCategory', function ($categoryNummer) {
+    $data = array(
+        'id' => $categoryNummer
+    );
+    return view('cms.cms_edit_category', $data);
+}));
+
+Route::post('cms/wijzigCategory', array('as' => 'wijzigCategory', 'uses' => 'CategoryController@editCategory'));
+Route::post('cms/nieuwCategory', array('as' => 'nieuwCategory', 'uses' => 'CategoryController@newCategory'));
+Route::get('cms/verwijderCategory/{id}', ['uses' => 'CategoryController@removeCategory']);
