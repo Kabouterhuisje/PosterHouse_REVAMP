@@ -9,6 +9,7 @@
         <br>
         <a href="{{URL::route('cms_products')}}" class="{{ (($currentPage)) == "products" ? 'active' : ' ' }}"><b>Producten</b></a>
         <a href="{{URL::route('cms_categories')}}" class="{{ (($currentPage)) == "categories" ? 'active' : ' ' }}"><b>Categorieën</b></a>
+        <a href="{{URL::route('cms_subcategories')}}" class="{{ (($currentPage)) == "subcategories" ? 'active' : ' ' }}"><b>Subcategorieën</b></a>
         <a href="{{ route('home') }}"><b>Terug</b></a>
         <a href="{{ route('logout') }}"
            onclick="event.preventDefault();

@@ -74,3 +74,23 @@ Route::get('cms/wijzig_category/{categoryNummer}', array('as' => 'editCategory',
 Route::post('cms/wijzigCategory', array('as' => 'wijzigCategory', 'uses' => 'CategoryController@editCategory'));
 Route::post('cms/nieuwCategory', array('as' => 'nieuwCategory', 'uses' => 'CategoryController@newCategory'));
 Route::get('cms/verwijderCategory/{id}', ['uses' => 'CategoryController@removeCategory']);
+
+Route::get('/cms/subcategories', array('as' => 'cms_subcategories', function () {
+    return view('cms.cms_subcategories');
+}));
+
+Route::get('cms/nieuw_subcategory', array('as' => 'newSubcategory', function () {
+    return view('cms.cms_new_subcategory');
+}));
+
+Route::get('cms/wijzig_subcategory/{subcategoryNummer}', array('as' => 'editSubcategory', function ($subcategoryNummer) {
+    $data = array(
+        'id' => $subcategoryNummer
+    );
+    return view('cms.cms_edit_subcategory', $data);
+}));
+
+Route::post('cms/wijzigSubcategory', array('as' => 'wijzigSubcategory', 'uses' => 'SubcategoryController@editSubcategory'));
+Route::post('cms/nieuwSubcategory', array('as' => 'nieuwSubcategory', 'uses' => 'SubcategoryController@newSubcategory'));
+Route::get('cms/verwijderSubcategory/{id}', ['uses' => 'SubcategoryController@removeSubcategory']);
+
