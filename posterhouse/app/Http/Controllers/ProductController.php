@@ -65,10 +65,16 @@ class ProductController extends Controller
     }
 
     // Edits a product
-    public function editProduct()
+    public function editProduct(Request $request)
     {
+        $this->validate($request, [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $imageName = $request->image->getClientOriginalName();
+        $request->image->move(public_path('images'), $imageName);
+
         Product::Where('id', '=', $_POST['id'])->update(['product_name' => $_POST['product_name'],
-            'image' => $_POST['image'], 'description' => $_POST['description'], 'price' => $_POST['price'] ]);
+            'image' => $imageName, 'description' => $_POST['description'], 'price' => $_POST['price'] ]);
 
         return Redirect::to('cms/producten');
     }
