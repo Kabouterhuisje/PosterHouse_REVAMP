@@ -11,7 +11,7 @@
     @include('layouts.cms_navigation', array('currentPage'=>'orders'))
     <div class="container-cms">
 
-        <h2><b>Producten overzicht</b></h2>
+        <h2><b>Orders overzicht</b></h2>
         <br>
 
         <!-- orders -->

@@ -11,7 +11,7 @@
     @include('layouts.cms_navigation', array('currentPage'=>'categories'))
     <div class="container-cms">
 
-        <h2><b>Producten overzicht</b></h2>
+        <h2><b>Categorieën overzicht</b></h2>
         <!--CONTENT IN HERE-->
         <!-- Knop om nieuwe categories aan te maken -->
         <br>
