@@ -48,9 +48,7 @@
 <!-- Paginering -->
 <div class="fixed-bottom">
     <div class="container center">
-        <ul class="pagination">
-
-        </ul>
+        {!! $products->links() !!}
     </div>
 </div>
 
