@@ -28,7 +28,7 @@ class ShoppingcartController extends Controller
 
     public function flushItem($key)
     {
-        session_unset($key);
+        Session::forget('shopping_cart.' . $key);
 
         return Redirect::to('/winkelmandje');
     }
