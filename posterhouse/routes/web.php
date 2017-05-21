@@ -31,6 +31,10 @@ Route::post('/winkelmandje', array('as' => 'continuePurchase','uses' => 'Shoppin
 
 Route::get('/winkelmandje/{key}', array('as' => 'flushItem','uses' => 'ShoppingcartController@flushItem'));
 
+Route::get('/orderoverview', array('as' => 'orderOverview','uses' => 'OrderController@orderOverview'));
+
+Route::post('/', array('as' => 'insertOrder','uses' => 'OrderController@insertOrder'));
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

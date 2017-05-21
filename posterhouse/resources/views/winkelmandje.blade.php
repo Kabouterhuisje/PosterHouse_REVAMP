@@ -18,21 +18,24 @@
                 <th width="15%">Totaal</th>
                 <th width="5%">Actie</th>
             </tr>
+            <?php $total = 0 ?>
+            @if(!empty(session('shopping_cart')))
                 @foreach (session('shopping_cart') as $key => $obj)
                     <tr>
                         <td>{{ $obj[0] }}</td>
-                        <td><input type="number" name="quantity" min="1" value="{{ $obj[2] }}"></td>
-                        <td>{{ $obj[1] }}</td>
-                        <td>{{ $obj[2] * $obj[1] }}</td>
+                        <td>{{ $obj[2] }}</td>
+                        <td>€ {{ $obj[1] }}</td>
+                        <td>€ {{ $obj[2] * $obj[1] }}</td>
                         <td><a href="{{ route('flushItem', $key) }}"><span class="text-danger">Remove</span></a></td>
                     </tr>
+                    <?php $total = $total + ($obj[2] * $obj[1]) ?>
                 @endforeach
                 <tr>
                     <td colspan="3" align="right">Total</td>
-                    <td align="right"></td>
+                    <td align="right">€ {{ number_format($total, 2) }}</td>
                     <td></td>
                 </tr>
-
+            @endif
         </table>
     </div>
     <input type="hidden" name="_token" value=" {{ csrf_token() }} ">

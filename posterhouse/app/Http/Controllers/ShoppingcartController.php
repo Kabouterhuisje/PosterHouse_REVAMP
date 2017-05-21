@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Session;
+use Auth;
 
 class ShoppingcartController extends Controller
 {
@@ -18,7 +19,8 @@ class ShoppingcartController extends Controller
         $product = collect([
             $request->get('hidden_name'),
             $request->get('hidden_price'),
-            $request->get('quantity')
+            $request->get('quantity'),
+            $request->get('hidden_id'),
         ]);
 
         session()->push('shopping_cart', $product);
@@ -36,7 +38,12 @@ class ShoppingcartController extends Controller
     public function continuePurchase(Request $request)
     {
         if ($request->has('checkout')) {
-            return Redirect::to('/orderoverview');
+            if (Auth::check()) {
+                return Redirect::to('/orderoverview');
+            }
+            else {
+                return Redirect::to('/login');
+            }
         }
         else if ($request->has('verder')) {
             return Redirect::to('/producten');

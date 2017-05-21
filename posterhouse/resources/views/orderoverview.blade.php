@@ -14,7 +14,7 @@
         <h1>Bedankt voor je bestelling!</h1>
         <p>Hieronder vind je een overzicht van uw bestelling.<br />
             Heeft u klachten over uw bestelling of bent u niet tevreden met het resultaat?<br />
-            Neem dan contact op met onze deskundige door <b><a href="contact.php">hier</a></b> te klikken!
+            Neem dan contact op met onze deskundige door naar de contactpagina te gaan.
         </p>
     </div>
     <h2>Overzicht van uw bestelling:</h2>
@@ -25,8 +25,24 @@
             <th width="20%">Prijs</th>
             <th width="15%">Totaal</th>
         </tr>
+        <?php $total = 0 ?>
+        @foreach (session('shopping_cart') as $key => $obj)
+            <tr>
+                <td>{{ $obj[0] }}</td>
+                <td>{{ $obj[2] }}</td>
+                <td>{{ $obj[1] }}</td>
+                <td>{{ $obj[2] * $obj[1] }}</td>
+            </tr>
+            <?php $total = $total + ($obj[2] * $obj[1]) ?>
+        @endforeach
+        <tr>
+            <td colspan="3" align="right">Total</td>
+            <td align="right">€ {{ number_format($total, 2) }}</td>
+        </tr>
     </table><br />
-    <form method="post" action="{{ route('insertdata') }}">
+    <form method="post" action="{{ route('insertOrder') }}">
+        <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
+        <input type="hidden" name="totalPrice" value=" {{ number_format($total, 2) }} ">
         <input type='submit' name='closeOveriew' style='margin-top:5px;' class='btn btn-success' value='Klik hier om door te gaan' />
     </form>
 </div>

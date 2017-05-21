@@ -27,6 +27,7 @@
                         <p>{{ $product->description }}</p>
                         <div class="btn-group cart">
                             <input required type="number" name="quantity" class="form-control" min="1" value="1" />
+                            <input type="hidden" name="hidden_id" value="{{ $product->id }}" />
                             <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" />
                         </div>
                     </form>
