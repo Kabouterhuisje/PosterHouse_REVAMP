@@ -20,7 +20,8 @@
                     </div>
                 </div>
                 <div style="text-align:center;">
-                    <form method="post" action="winkelmandje.php?action=add&id=">
+                    <form method="post" action="{{ route('addToCart') }}">
+                        <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
                         <input type="hidden" name="hidden_name" value="{{ $product->product_name }}" />
                         <input type="hidden" name="hidden_price" value="{{ $product->price }}" />
                         <p>{{ $product->description }}</p>

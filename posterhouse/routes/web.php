@@ -19,9 +19,17 @@ Route::get('/contact', array('as' => 'contact', function () {
     return view('contact');
 }));
 
-Route::get('/winkelmandje', array('as' => 'winkelmandje', function () {
-    return view('winkelmandje');
+Route::get('/orderoverview', array('as' => 'orderoverview', function () {
+    return view('orderoverview');
 }));
+
+Route::get('/winkelmandje', array('as' => 'winkelmandje','uses' => 'ShoppingcartController@viewCart'));
+
+Route::post('/addToCart', array('as' => 'addToCart','uses' => 'ShoppingcartController@addToCart'));
+
+Route::post('/winkelmandje', array('as' => 'continuePurchase','uses' => 'ShoppingcartController@continuePurchase'));
+
+Route::get('/winkelmandje/{key}', array('as' => 'flushItem','uses' => 'ShoppingcartController@flushItem'));
 
 Auth::routes();
 
