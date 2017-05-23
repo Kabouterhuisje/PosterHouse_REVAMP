@@ -11,7 +11,7 @@ class Order_has_productTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('order_has_product')->delete();
+        DB::table('order_has_products')->delete();
 
         $order_has_product = array(
             array(
@@ -28,6 +28,6 @@ class Order_has_productTableSeeder extends Seeder
             )
         );
 
-        DB::table('order_has_product')->insert($order_has_product);
+        DB::table('order_has_products')->insert($order_has_product);
     }
 }
