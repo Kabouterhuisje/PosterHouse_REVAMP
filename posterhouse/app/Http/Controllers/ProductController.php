@@ -71,7 +71,7 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $imageName = $request->image->getClientOriginalName();
-        $request->image->move(public_path('images'), $imageName);
+        $request->image->move(public_path('images/posters'), $imageName);
 
         if(isset($_POST['product_name']) && isset($_POST['description']) && isset($_POST['price']) && isset($_POST['subcategory']))
         {
