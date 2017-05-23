@@ -112,3 +112,13 @@ Route::get('/cms/orders', array('as' => 'cms_orders', function () {
 
 Route::get('cms/verwijderOrder/{id}', ['uses' => 'OrderController@removeOrder']);
 
+Route::get('403', ["as" => "403", function()
+{
+    return view('errors/403');
+}]);
+
+Route::get('422', ["as" => "422", function()
+{
+    return view('errors/422');
+}]);
+

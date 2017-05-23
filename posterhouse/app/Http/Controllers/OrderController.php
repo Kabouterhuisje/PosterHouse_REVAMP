@@ -12,13 +12,31 @@ use Illuminate\Support\Facades\Redirect;
 
 class OrderController extends Controller
 {
+    private function validateUser()
+    {
+        if(!Auth::check() || !Auth::user()->role == "admin")
+        {
+            return false;
+        }
+    }
+
     public function orderOverview()
     {
+        if($this->validateUser() === false)
+        {
+            return Redirect::to('403');
+        }
+
         return view('orderoverview');
     }
 
     public function insertOrder(Request $request)
     {
+        if($this->validateUser() === false)
+        {
+            return Redirect::to('403');
+        }
+
         $order = Order::insertGetId([
             'total_price' => $request['totalPrice'],
             'date_created' => Carbon::now('Europe/Amsterdam'),
@@ -41,6 +59,11 @@ class OrderController extends Controller
 
     public function removeOrder($id)
     {
+        if($this->validateUser() === false)
+        {
+            return Redirect::to('403');
+        }
+
         Order::Where('id', '=', $id)->Delete();
 
         return redirect('cms/orders');

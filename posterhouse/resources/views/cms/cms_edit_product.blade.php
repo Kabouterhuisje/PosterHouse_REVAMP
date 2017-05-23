@@ -27,15 +27,12 @@
             <textarea rows="5" cols="60" name="description" required>{{ $product->description }} </textarea> <br>
             Prijs: <br>
             <input type="number" step="any" name="price" min="0" value="{{ $product->price }}" required>  <br>
-
             <br>
             <input class="btn btn-primary" type="submit" value="Wijzigen"/>
         </form>
     </div>
 @else
-
-    <script>window.location.href = "{{ route('login') }}"</script>
-
+    <script>window.location.href = "{{ route('403') }}"</script>
 @endif
 </body>
 </html>

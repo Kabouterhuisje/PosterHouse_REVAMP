@@ -10,14 +10,12 @@
 @if (Auth::check() && Auth::user()->role == "admin")
     @include('layouts.cms_navigation', array('currentPage'=>'subcategories'))
     <div class="container-cms">
-
         <h2><b>Subcategorieën overzicht</b></h2>
         <!--CONTENT IN HERE-->
         <!-- Knop om nieuwe subcategories aan te maken -->
         <br>
         <button type="button" class="btn btn-primary"  onclick="window.location='{{URL::route('newSubcategory')}}'">Nieuwe subcategorie</button>
         <br>
-
         <!-- subcategories -->
         @php
             $subcategories = App\Subcategory::all();
@@ -25,7 +23,6 @@
             $controller = new \App\Http\Controllers\SubcategoryController();
             $categories= App\Category::all();
         @endphp
-
         <table id="table-style">
             <tr id="table-row-style">
                 <th id="table-header-style">ID</th>
@@ -49,9 +46,7 @@
         </table>
     </div>
 @else
-
-    <script>window.location.href = "{{ route('login') }}"</script>
-
+    <script>window.location.href = "{{ route('403') }}"</script>
 @endif
 </body>
 </html>

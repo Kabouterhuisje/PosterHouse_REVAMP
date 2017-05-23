@@ -10,17 +10,14 @@
 @if (Auth::check() && Auth::user()->role == "admin")
     @include('layouts.cms_navigation', array('currentPage'=>'orders'))
     <div class="container-cms">
-
         <h2><b>Orders overzicht</b></h2>
         <br>
-
         <!-- orders -->
         @php
             $orders = App\Order::all();
             $users = App\User::all();
             $controller = new \App\Http\Controllers\OrderController();
         @endphp
-
         <table id="table-style">
             <tr id="table-row-style">
                 <th id="table-header-style">ID</th>
@@ -45,9 +42,7 @@
         </table>
     </div>
 @else
-
-    <script>window.location.href = "{{ route('login') }}"</script>
-
+    <script>window.location.href = "{{ route('403') }}"</script>
 @endif
 </body>
 </html>

@@ -10,14 +10,12 @@
 @if (Auth::check() && Auth::user()->role == "admin")
     @include('layouts.cms_navigation', array('currentPage'=>'products'))
     <div class="container-cms">
-
         <h2><b>Producten overzicht</b></h2>
         <!--CONTENT IN HERE-->
         <!-- Knop om nieuwe producten aan te maken -->
         <br>
         <button type="button" class="btn btn-primary"  onclick="window.location='{{URL::route('newProduct')}}'">Nieuw Product</button>
         <br>
-
         <!-- producten -->
         @php
             $products = App\Product::all();
@@ -25,7 +23,6 @@
             $subcategories = App\Subcategory::all();
             $controller = new \App\Http\Controllers\ProductController();
         @endphp
-
         <table id="table-style">
             <tr id="table-row-style">
                 <th id="table-header-style">ID</th>
@@ -59,9 +56,7 @@
         </table>
     </div>
 @else
-
-    <script>window.location.href = "{{ route('login') }}"</script>
-
+    <script>window.location.href = "{{ route('403') }}"</script>
 @endif
 </body>
 </html>

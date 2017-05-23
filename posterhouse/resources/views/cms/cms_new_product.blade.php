@@ -36,9 +36,7 @@
         </form>
     </div>
 @else
-
-    <script>window.location.href = "{{ route('login') }}"</script>
-
+    <script>window.location.href = "{{ route('403') }}"</script>
 @endif
 </body>
 </html>

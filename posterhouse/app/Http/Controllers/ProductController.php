@@ -9,9 +9,18 @@ use App\Subcategory;
 use App\Product;
 use Illuminate\Support\Facades\Redirect;
 use DB;
+use Auth;
 
 class ProductController extends Controller
 {
+    private function validateUser()
+    {
+        if(!Auth::check() || !Auth::user()->role == "admin")
+        {
+            return false;
+        }
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -53,20 +62,29 @@ class ProductController extends Controller
     // Creates a new product
     public function newProduct(Request $request)
     {
+        if($this->validateUser() === false)
+        {
+            return Redirect::to('403');
+        }
+
         $this->validate($request, [
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $imageName = $request->image->getClientOriginalName();
         $request->image->move(public_path('images'), $imageName);
 
-//        Product::Insert(['product_name' => $_POST['product_name'], 'image' => $imageName, 'description' => $_POST['description'],
-//            'price' => $_POST['price'] ]);
+        if(isset($_POST['product_name']) && isset($_POST['description']) && isset($_POST['price']) && isset($_POST['subcategory']))
+        {
+            $last_id = DB::table('products')->insertGetId(
+                ['product_name' => $_POST['product_name'], 'image' => $imageName, 'description' => $_POST['description'], 'price' => $_POST['price']]
+            );
 
-        $last_id = DB::table('products')->insertGetId(
-          ['product_name' => $_POST['product_name'], 'image' => $imageName, 'description' => $_POST['description'], 'price' => $_POST['price']]
-        );
-
-        Product_has_subcategory::Insert(['Product_id' => $last_id, 'Subcategory_id' => $_POST['subcategory'] ]);
+            Product_has_subcategory::Insert(['Product_id' => $last_id, 'Subcategory_id' => $_POST['subcategory'] ]);
+        }
+        else
+        {
+            return Redirect::to('422');
+        }
 
         return Redirect::to('cms/producten');
 
@@ -75,20 +93,37 @@ class ProductController extends Controller
     // Edits a product
     public function editProduct(Request $request)
     {
+        if($this->validateUser() === false)
+        {
+            return Redirect::to('403');
+        }
+
         $this->validate($request, [
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $imageName = $request->image->getClientOriginalName();
         $request->image->move(public_path('images'), $imageName);
 
-        Product::Where('id', '=', $_POST['id'])->update(['product_name' => $_POST['product_name'],
-            'image' => $imageName, 'description' => $_POST['description'], 'price' => $_POST['price'] ]);
+        if(isset($_POST['product_name']) && isset($_POST['description']) && isset($_POST['price']))
+        {
+            Product::Where('id', '=', $_POST['id'])->update(['product_name' => $_POST['product_name'],
+                'image' => $imageName, 'description' => $_POST['description'], 'price' => $_POST['price'] ]);
+        }
+        else
+        {
+            return Redirect::to('422');
+        }
 
         return Redirect::to('cms/producten');
     }
 
     public function removeProduct($id)
     {
+        if($this->validateUser() === false)
+        {
+            return Redirect::to('403');
+        }
+
         Product::Where('id', '=', $id)->Delete();
 
         return redirect('cms/producten');
