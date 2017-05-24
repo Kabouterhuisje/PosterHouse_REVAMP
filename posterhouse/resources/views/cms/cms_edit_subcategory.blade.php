@@ -21,7 +21,7 @@
             <br> <br>
             Subcategorienaam: <br>
             <input type="text" name="subcategory_name" value="{{ $subcategory->subcategory_name }}" required> <br> <br>
-            Categorie van: <br>
+            Subcategorie van: <br>
             <select name="subcategory_from" required>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}" name="subcategory_from">{{ $category->category_name }}</option>

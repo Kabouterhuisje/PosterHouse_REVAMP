@@ -15,7 +15,7 @@
             <br> <br>
             Subcategorienaam: <br>
             <input type="text" name="subcategory_name" value="" required> <br> <br>
-            Categorie van: <br>
+            Subcategorie van: <br>
             @php
                 $categories = App\Category::all();
             @endphp
