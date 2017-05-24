@@ -15,9 +15,51 @@ class ProductController extends Controller
 {
     private function validateUser()
     {
-        if(!Auth::check() || !Auth::user()->role == "admin")
+        if(Auth::check())
         {
-            return false;
+            if(Auth::user()->role == "admin")
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function create()
+    {
+        if(!$this->validateUser())
+        {
+            return Redirect::to('403');
+        }
+        else
+        {
+            return view('cms.cms_products');
+        }
+    }
+
+    public function createNewProduct()
+    {
+        if(!$this->validateUser())
+        {
+            return Redirect::to('403');
+        }
+        else
+        {
+            return view('cms.cms_new_product');
+        }
+    }
+
+    function editView($productNummer)
+    {
+        //authenticatie
+        if (!$this->validateUser())
+        {
+            return Redirect::to('403');
+        }
+        else
+        {
+            $data = ['id' => $productNummer];
+            return view('cms.cms_edit_product', $data);
         }
     }
 
@@ -62,7 +104,7 @@ class ProductController extends Controller
     // Creates a new product
     public function newProduct(Request $request)
     {
-        if($this->validateUser() === false)
+        if(!$this->validateUser())
         {
             return Redirect::to('403');
         }
@@ -93,7 +135,7 @@ class ProductController extends Controller
     // Edits a product
     public function editProduct(Request $request)
     {
-        if($this->validateUser() === false)
+        if(!$this->validateUser())
         {
             return Redirect::to('403');
         }
@@ -119,7 +161,7 @@ class ProductController extends Controller
 
     public function removeProduct($id)
     {
-        if($this->validateUser() === false)
+        if(!$this->validateUser())
         {
             return Redirect::to('403');
         }

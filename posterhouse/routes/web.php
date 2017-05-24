@@ -43,72 +43,41 @@ Route::get('/producten', 'ProductController@index')->name('producten');
 
 Route::get('/productdetails/{product}', 'ProductDetailsController@index')->name('productdetails');
 
-Route::get('/cms', array('as' => 'cms_home', function () {
-    return view('cms.cms_home');
-}));
+Route::get('/cms', ['as' => 'cms_home', 'uses' => 'HomeController@createCMS']);
 
 Route::post('send_message', array('as' => 'send_message', 'uses' => 'MessageController@sendMessage'));
 
-Route::get('/cms/producten', array('as' => 'cms_products', function () {
-    return view('cms.cms_products');
-}));
+Route::get('/cms/producten', ['as' => 'cms_products', 'uses' => 'ProductController@create']);
 
-Route::get('cms/nieuw_product', array('as' => 'newProduct', function () {
-    return view('cms.cms_new_product');
-}));
+Route::get('/cms/nieuw_product', ['as' => 'newProduct', 'uses' => 'ProductController@createNewProduct']);
 
-Route::get('cms/wijzig_product/{productNummer}', array('as' => 'editProduct', function ($productNummer) {
-    $data = array(
-        'id' => $productNummer
-    );
-    return view('cms.cms_edit_product', $data);
-}));
+Route::get('cms/wijzig_product/{productNummer}', ['as' => 'editProduct', 'uses' => 'ProductController@editView']);
 
 Route::post('cms/wijzigProduct', array('as' => 'wijzigProduct', 'uses' => 'ProductController@editProduct'));
 Route::post('cms/nieuwProduct', array('as' => 'nieuwProduct', 'uses' => 'ProductController@newProduct'));
 Route::get('cms/verwijderProduct/{id}', ['uses' => 'ProductController@removeProduct']);
 
-Route::get('/cms/categories', array('as' => 'cms_categories', function () {
-    return view('cms.cms_categories');
-}));
+Route::get('/cms/categories', ['as' => 'cms_categories', 'uses' => 'CategoryController@create']);
 
-Route::get('cms/nieuw_category', array('as' => 'newCategory', function () {
-    return view('cms.cms_new_category');
-}));
+Route::get('/cms/nieuw_category', ['as' => 'newCategory', 'uses' => 'CategoryController@createNewCategory']);
 
-Route::get('cms/wijzig_category/{categoryNummer}', array('as' => 'editCategory', function ($categoryNummer) {
-    $data = array(
-        'id' => $categoryNummer
-    );
-    return view('cms.cms_edit_category', $data);
-}));
+Route::get('cms/wijzig_category/{categoryNummer}', ['as' => 'editCategory', 'uses' => 'CategoryController@editView']);
 
 Route::post('cms/wijzigCategory', array('as' => 'wijzigCategory', 'uses' => 'CategoryController@editCategory'));
 Route::post('cms/nieuwCategory', array('as' => 'nieuwCategory', 'uses' => 'CategoryController@newCategory'));
 Route::get('cms/verwijderCategory/{id}', ['uses' => 'CategoryController@removeCategory']);
 
-Route::get('/cms/subcategories', array('as' => 'cms_subcategories', function () {
-    return view('cms.cms_subcategories');
-}));
+Route::get('/cms/subcategories', ['as' => 'cms_subcategories', 'uses' => 'SubcategoryController@create']);
 
-Route::get('cms/nieuw_subcategory', array('as' => 'newSubcategory', function () {
-    return view('cms.cms_new_subcategory');
-}));
+Route::get('/cms/nieuw_subcategory', ['as' => 'newSubcategory', 'uses' => 'SubcategoryController@createNewSubcategory']);
 
-Route::get('cms/wijzig_subcategory/{subcategoryNummer}', array('as' => 'editSubcategory', function ($subcategoryNummer) {
-    $data = array(
-        'id' => $subcategoryNummer
-    );
-    return view('cms.cms_edit_subcategory', $data);
-}));
+Route::get('cms/wijzig_subcategory/{subcategoryNummer}', ['as' => 'editSubcategory', 'uses' => 'SubcategoryController@editView']);
 
 Route::post('cms/wijzigSubcategory', array('as' => 'wijzigSubcategory', 'uses' => 'SubcategoryController@editSubcategory'));
 Route::post('cms/nieuwSubcategory', array('as' => 'nieuwSubcategory', 'uses' => 'SubcategoryController@newSubcategory'));
 Route::get('cms/verwijderSubcategory/{id}', ['uses' => 'SubcategoryController@removeSubcategory']);
 
-Route::get('/cms/orders', array('as' => 'cms_orders', function () {
-    return view('cms.cms_orders');
-}));
+Route::get('/cms/orders', ['as' => 'cms_orders', 'uses' => 'OrderController@create']);
 
 Route::get('cms/verwijderOrder/{id}', ['uses' => 'OrderController@removeOrder']);
 

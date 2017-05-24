@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body class="body-cms">
-@if (Auth::check() && Auth::user()->role == "admin")
     @include('layouts.cms_navigation', array('currentPage'=>'subcategories'))
     <div class="container-cms">
         <form action="{{ route('nieuwSubcategory') }}" method="post" enctype="multipart/form-data">
@@ -29,8 +28,5 @@
             <input class="btn btn-primary" type="submit" value="Aanmaken"/>
         </form>
     </div>
-@else
-    <script>window.location.href = "{{ route('403') }}"</script>
-@endif
 </body>
 </html>

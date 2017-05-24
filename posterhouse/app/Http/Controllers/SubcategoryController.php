@@ -11,16 +11,58 @@ class SubcategoryController extends Controller
 {
     private function validateUser()
     {
-        if(!Auth::check() || !Auth::user()->role == "admin")
+        if(Auth::check())
         {
-            return false;
+            if(Auth::user()->role == "admin")
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function create()
+    {
+        if(!$this->validateUser())
+        {
+            return Redirect::to('403');
+        }
+        else
+        {
+            return view('cms.cms_subcategories');
+        }
+    }
+
+    public function createNewSubCategory()
+    {
+        if(!$this->validateUser())
+        {
+            return Redirect::to('403');
+        }
+        else
+        {
+            return view('cms.cms_new_subcategory');
+        }
+    }
+
+    function editView($subcategoryNummer)
+    {
+        //authenticatie
+        if (!$this->validateUser())
+        {
+            return Redirect::to('403');
+        }
+        else
+        {
+            $data = ['id' => $subcategoryNummer];
+            return view('cms.cms_edit_subcategory', $data);
         }
     }
 
     // Creates a new subcategory
     public function newSubcategory(Request $request)
     {
-        if($this->validateUser() === false)
+        if(!$this->validateUser())
         {
             return Redirect::to('403');
         }
@@ -41,7 +83,7 @@ class SubcategoryController extends Controller
     // Edits a subcategory
     public function editSubcategory(Request $request)
     {
-        if($this->validateUser() === false)
+        if(!$this->validateUser())
         {
             return Redirect::to('403');
         }
@@ -60,7 +102,7 @@ class SubcategoryController extends Controller
 
     public function removeSubcategory($id)
     {
-        if($this->validateUser() === false)
+        if(!$this->validateUser())
         {
             return Redirect::to('403');
         }

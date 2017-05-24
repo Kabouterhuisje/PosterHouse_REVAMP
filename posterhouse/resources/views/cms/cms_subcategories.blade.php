@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body class="body-cms">
-@if (Auth::check() && Auth::user()->role == "admin")
     @include('layouts.cms_navigation', array('currentPage'=>'subcategories'))
     <div class="container-cms">
         <h2><b>Subcategorieën overzicht</b></h2>
@@ -45,8 +44,5 @@
             @endforeach
         </table>
     </div>
-@else
-    <script>window.location.href = "{{ route('403') }}"</script>
-@endif
 </body>
 </html>

@@ -11,16 +11,58 @@ class CategoryController extends Controller
 {
     private function validateUser()
     {
-        if(!Auth::check() || !Auth::user()->role == "admin")
+        if(Auth::check())
         {
-            return false;
+            if(Auth::user()->role == "admin")
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function create()
+    {
+        if(!$this->validateUser())
+        {
+            return Redirect::to('403');
+        }
+        else
+        {
+            return view('cms.cms_categories');
+        }
+    }
+
+    public function createNewCategory()
+    {
+        if(!$this->validateUser())
+        {
+            return Redirect::to('403');
+        }
+        else
+        {
+            return view('cms.cms_new_category');
+        }
+    }
+
+    function editView($categoryNummer)
+    {
+        //authenticatie
+        if (!$this->validateUser())
+        {
+            return Redirect::to('403');
+        }
+        else
+        {
+            $data = ['id' => $categoryNummer];
+            return view('cms.cms_edit_category', $data);
         }
     }
 
     // Creates a new category
     public function newCategory(Request $request)
     {
-        if($this->validateUser() === false)
+        if(!$this->validateUser())
         {
             return Redirect::to('403');
         }
@@ -41,7 +83,7 @@ class CategoryController extends Controller
     // Edits a product
     public function editCategory(Request $request)
     {
-        if($this->validateUser() === false)
+        if(!$this->validateUser())
         {
             return Redirect::to('403');
         }
@@ -60,7 +102,7 @@ class CategoryController extends Controller
 
     public function removeCategory($id)
     {
-        if($this->validateUser() === false)
+        if(!$this->validateUser())
         {
             return Redirect::to('403');
         }

@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body class="body-cms">
-@if (Auth::check() && Auth::user()->role == "admin")
     @include('layouts.cms_navigation', array('currentPage'=>'categories'))
     @php
         $parts=parse_url(url()->current());
@@ -25,8 +24,5 @@
             <input class="btn btn-primary" type="submit" value="Wijzigen"/>
         </form>
     </div>
-@else
-    <script>window.location.href = "{{ route('403') }}"</script>
-@endif
 </body>
 </html>
