@@ -141,15 +141,26 @@ class ProductController extends Controller
         }
 
         $this->validate($request, [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $imageName = $request->image->getClientOriginalName();
-        $request->image->move(public_path('images'), $imageName);
+        if ($request->image){
+            $imageName = $request->image->getClientOriginalName();
+            $request->image->move(public_path('images/posters'), $imageName);
+        }
 
-        if(isset($_POST['product_name']) && isset($_POST['description']) && isset($_POST['price']))
+        if(isset($_POST['product_name']) && isset($_POST['description']) && isset($_POST['price'])  && isset($_POST['subcategory']))
         {
-            Product::Where('id', '=', $_POST['id'])->update(['product_name' => $_POST['product_name'],
-                'image' => $imageName, 'description' => $_POST['description'], 'price' => $_POST['price'] ]);
+            if ($request->image)
+            {
+                Product::Where('id', '=', $_POST['id'])->update(['product_name' => $_POST['product_name'],
+                    'image' => $imageName, 'description' => $_POST['description'], 'price' => $_POST['price'] ]);
+            }
+            else
+            {
+                Product::Where('id', '=', $_POST['id'])->update(['product_name' => $_POST['product_name'],
+                    'description' => $_POST['description'], 'price' => $_POST['price'] ]);
+            }
+            Product_has_subcategory::Where('Product_id', '=', $_POST['id'])->update(['Product_id' => $_POST['id'], 'Subcategory_id' => $_POST['subcategory'] ]);
         }
         else
         {
