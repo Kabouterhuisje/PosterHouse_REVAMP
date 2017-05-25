@@ -19,14 +19,12 @@ class UsersTableSeeder extends Seeder
                 'email' => 'jan@gmail.com',
                 'role' => '',
                 'password' => Hash::make('password'),
-                'address' => 'onderwijslaan 12'
             ),
             array(
                 'name' => 'admin',
                 'email' => 'admin@admin.com',
                 'role' => 'admin',
                 'password' => Hash::make('admin'),
-                'address' => 'admin'
             )
         );
 
