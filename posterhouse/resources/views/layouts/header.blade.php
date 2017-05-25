@@ -46,11 +46,11 @@
                                     <li class="auth_links"><a href="{{ route('cms_home') }}">Beheer</a></li>
                                 </a><br>
                             @endif
-                            <a href="{{ route('logout') }}"
+                            <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 Uitloggen
-                            </a>
+                            </a></li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                   style="display: none;">
                                 {{ csrf_field() }}
