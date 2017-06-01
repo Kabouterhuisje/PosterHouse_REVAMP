@@ -68,7 +68,7 @@ class OrderController extends Controller
             ]);
         }
 
-        Session::forget('shopping_cart');
+        session::forget('shopping_cart');
 
         return view('welcome');
     }

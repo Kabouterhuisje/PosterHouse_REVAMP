@@ -30,7 +30,7 @@ class ShoppingcartController extends Controller
 
     public function flushItem($key)
     {
-        Session::forget('shopping_cart.' . $key);
+        session::forget('shopping_cart.' . $key);
 
         return Redirect::to('/winkelmandje');
     }
