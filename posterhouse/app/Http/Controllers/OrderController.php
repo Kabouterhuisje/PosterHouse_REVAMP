@@ -81,6 +81,7 @@ class OrderController extends Controller
         }
 
         Order::Where('id', '=', $id)->Delete();
+        Order_has_product::Where('Order_id', '=', $id)->Delete();
 
         return redirect('cms/orders');
     }
